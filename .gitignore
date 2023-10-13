@@ -1,3 +1,7 @@
+# mine
+example/output
+example/magus_result.txt
+magus_tools/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

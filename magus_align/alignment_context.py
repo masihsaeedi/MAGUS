@@ -55,6 +55,8 @@ class AlignmentContext:
         self.unalignedSequences = {}
         for i, subsetPath in enumerate(self.subsetPaths):
             self.subsets.append([])
+            Configs.log("alignment_context subsets ")
+            Configs.log(subset)
             subset = sequenceutils.readFromFastaOrdered(subsetPath, removeDashes=True)
             for sequence in subset:
                 self.unalignedSequences[sequence.tag] = sequence
@@ -71,6 +73,7 @@ class AlignmentContext:
                     self.subalignments.append([taxon])
                 
     def initializeBackboneSequenceMapping(self):
+        Configs.log("alignment_context initializeBackboneSequenceMapping")
         if len(self.backboneTaxa) == 0:
             backboneSubsetTaxonMap = {i : subset for i, subset in enumerate(self.subsets)}
         else:

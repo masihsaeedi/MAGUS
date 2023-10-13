@@ -35,6 +35,14 @@ def purgeClusterViolations(graph):
                     scoresum  = scoresum  + graph.matrix[b].get(c,0)
             elementScores[a, b] = scoresum 
     
+    Configs.log("clean_clusters redundantCols")
+    Configs.log(redundantCols)
+    Configs.log("clean_clusters redundantRows")
+    Configs.log(redundantRows)
+
+    Configs.log("clean_clusters elementScores")
+    Configs.log(elementScores)
+
     problemCols = [(a,b) for a,b in redundantCols if len(redundantCols[a,b]) > 1]
     problemRows = [a for a in redundantRows if len(redundantRows[a]) > 1]
     Configs.log("Found {} row violations and {} column violations..".format(len(problemRows), len(problemCols)))

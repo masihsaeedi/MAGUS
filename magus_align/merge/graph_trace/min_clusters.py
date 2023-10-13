@@ -30,7 +30,8 @@ def minClustersSearch(graph):
     greedy = False
     totalPairs = 0
 
-    
+    Configs.log("min clusters graph clusters")
+    Configs.log(graph.clusters)
     for a,cluster in enumerate(graph.clusters):
         for b in cluster:
             bsub, bpos = graph.matSubPosMap[b] 
@@ -38,7 +39,9 @@ def minClustersSearch(graph):
             clusterPositions[a] = {}
             totalPairs = totalPairs + len(cluster)*(len(cluster)-1)/2
                 
-    
+    Configs.log("min_clusters subsetClusters")
+    Configs.log(subsetClusters)
+
     for asub in subsetClusters:
         subsetClusters[asub].sort(key = lambda c: c[1])
         queueIdxs[asub] = 0
@@ -54,6 +57,8 @@ def minClustersSearch(graph):
     
     startState = (0, 0, len(graph.clusters), totalPairs, stateCounter, queueIdxs, clusterBreaks, maximalCut, [], True)
     startState = developState(startState, graph, aggression, greedy, 0, subsetClusters, clusterPositions)
+    Configs.log("min_clusters startState")
+    Configs.log(startState)
     heapq.heappush(heap, startState)
     
     while len(heap) > 0:

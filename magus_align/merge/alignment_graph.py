@@ -46,7 +46,9 @@ class AlignmentGraph:
             self.subalignmentLengths = [sequenceutils.readSequenceLengthFromFasta(file) for file in self.context.subalignmentPaths]
         else:
             self.subalignmentLengths = [len(self.context.unalignedSequences[s[0]].seq) for s in self.context.subalignments]
-        
+            
+        Configs.log("alignment_graph Intialize Matrix")
+        Configs.log(self.subalignmentLengths)
         self.matrixSize = sum(self.subalignmentLengths)    
         self.subsetMatrixIdx = [0] * len(self.subalignmentLengths)
         for k in range(1, len(self.subalignmentLengths)):        
@@ -54,12 +56,14 @@ class AlignmentGraph:
         
         self.matSubPosMap = [0] * self.matrixSize
         i = 0
+
+        Configs.log("alignment_graph matrix")
         for k in range(len(self.subalignmentLengths)):
             for j in range(self.subalignmentLengths[k]):
                 self.matSubPosMap[i] = (k, j)
                 i = i + 1
-        
         self.matrix = [{} for i in range(self.matrixSize)]
+        Configs.log(self.matrix)
     
     def writeGraphToFile(self, filePath):
         with open(filePath, 'w') as textFile:

@@ -73,7 +73,8 @@ def requestBackboneTasks(context):
 
 def requestMafftBackbones(context):
     numTaxa = max(1, int(Configs.mafftSize/len(context.subsetPaths)))
-
+    Configs.log("graph_builder numTaxa")
+    Configs.log(numTaxa)
     for n in range(Configs.mafftRuns):
         unalignedFile = os.path.join(context.graph.workingDir, "backbone_{}_unalign.txt".format(n+1))
         alignedFile = os.path.join(context.graph.workingDir, "backbone_{}_mafft.txt".format(n+1))
